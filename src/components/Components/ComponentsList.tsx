@@ -24,7 +24,7 @@ export default function ComponentsList({ components, onCreateNew, onEdit, onDele
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Components</h1>
         <button
-          onClick={onCreateNew}
+          onClick={() => onCreateNew('component')}
           className="bg-yellow-600 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-yellow-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
@@ -64,7 +64,7 @@ export default function ComponentsList({ components, onCreateNew, onEdit, onDele
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
                     <Cpu className="w-12 h-12 mx-auto text-gray-300 mb-4" />
-                    <p>No components found. <button onClick={onCreateNew} className="text-yellow-600 hover:text-yellow-500">Create your first component</button></p>
+                    <p>No components found. <button onClick={() => onCreateNew('component')} className="text-yellow-600 hover:text-yellow-500">Create your first component</button></p>
                   </td>
                 </tr>
               ) : (

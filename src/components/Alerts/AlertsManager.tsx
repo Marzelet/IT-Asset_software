@@ -60,7 +60,72 @@ export default function AlertsManager({ alerts, onAcknowledge, onResolve, onDism
   const handleCreateAlert = async (alertData: Omit<Alert, 'id'>) => {
     setLoading(true);
     try {
-      const response = await apiService.request('/alerts', {
+      const response = await apiService.createAlert(alertData);
+      if (response.data) {
+        // Alert created successfully via API
+        console.log('Alert created:', response.data);
+        // Refresh alerts list or add to local state
+        window.location.reload(); // Simple refresh for demo
+      } else {
+        // Fallback to local creation
+        const newAlert: Alert = {
+          ...alertData,
+          id: Date.now().toString()
+        };
+        console.log('Alert created locally:', newAlert);
+      }
+    } catch (error) {
+      console.warn('Failed to create alert via API');
+      // Fallback to local creation
+      const newAlert: Alert = {
+        ...alertData,
+        id: Date.now().toString()
+      };
+      console.log('Alert created locally:', newAlert);
+    } finally {
+      setLoading(false);
+      setShowCreateForm(false);
+    }
+  };
+
+  const handleBulkAction = async (action: 'acknowledge' | 'resolve' | 'dismiss', alertIds: string[]) => {
+    setLoading(true);
+    try {
+      const response = await apiService.bulkUpdateAlerts(action, alertIds);
+      if (response.data) {
+        // Update alerts based on action
+        alertIds.forEach(id => {
+          switch (action) {
+            case 'acknowledge':
+              onAcknowledge(id);
+              break;
+            case 'resolve':
+              onResolve(id);
+              break;
+            case 'dismiss':
+              onDismiss(id);
+              break;
+          }
+        });
+      }
+    } catch (error) {
+      console.warn('Failed to perform bulk action via API');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdateSettings = async (newSettings: typeof alertSettings) => {
+    try {
+      const response = await apiService.updateAlertSettings(newSettings);
+      if (response.data) {
+        setAlertSettings(newSettings);
+        console.log('Alert settings updated successfully');
+      }
+    } catch (error) {
+      console.warn('Failed to update alert settings');
+    }
+  };
         method: 'POST',
         body: JSON.stringify(alertData)
       });

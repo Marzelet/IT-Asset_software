@@ -91,7 +91,7 @@ export default function RequestableItemsList({
             <span>Download Template</span>
           </button>
           <button
-            onClick={onCreateNew}
+            onClick={() => onCreateNew('requestable')}
             className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-green-700 transition-colors"
           >
             <Plus className="w-4 h-4" />
@@ -184,7 +184,7 @@ export default function RequestableItemsList({
             <h3 className="text-lg font-medium text-gray-900 mb-2">No requestable items found</h3>
             <p className="text-gray-500 mb-6">Set up items that users can request through the system.</p>
             <button
-              onClick={onCreateNew}
+              onClick={() => onCreateNew('requestable')}
               className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition-colors font-medium"
             >
               Create Your First Requestable Item

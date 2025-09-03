@@ -229,7 +229,243 @@ function App() {
   };
 
   // Save handlers for each type
-  const handleSaveAsset = (assetData: Omit<Asset, 'id'>) => {
+  const handleSaveAsset = async (assetData: Omit<Asset, 'id'>) => {
+    try {
+      const response = await apiService.createAsset(assetData);
+      if (response.data) {
+        setAssets(prev => [...prev, response.data]);
+      } else {
+        // Fallback to local state
+        const newAsset: Asset = {
+          ...assetData,
+          id: Date.now().toString(),
+          custodianHistory: [],
+          lifecycle: {
+            procurementDate: assetData.purchaseDate || new Date().toISOString(),
+            stage: 'Active',
+            deploymentDate: new Date().toISOString(),
+            lastCalculated: new Date().toISOString()
+          },
+          depreciation: {
+            method: 'Straight Line',
+            usefulLife: 5,
+            salvageValue: 0,
+            currentValue: assetData.purchaseCost || 0,
+            depreciationRate: 20,
+            lastCalculated: new Date().toISOString()
+          },
+          maintenanceRecords: [],
+          complianceStatus: 'Compliant',
+          warrantyStatus: 'Active',
+          specifications: {}
+        };
+        setAssets(prev => [...prev, newAsset]);
+      }
+    } catch (error) {
+      console.warn('Failed to create asset via API, using local state');
+      // Fallback creation
+      const newAsset: Asset = {
+        ...assetData,
+        id: Date.now().toString(),
+        custodianHistory: [],
+        lifecycle: {
+          procurementDate: assetData.purchaseDate || new Date().toISOString(),
+          stage: 'Active',
+          deploymentDate: new Date().toISOString(),
+          lastCalculated: new Date().toISOString()
+        },
+        depreciation: {
+          method: 'Straight Line',
+          usefulLife: 5,
+          salvageValue: 0,
+          currentValue: assetData.purchaseCost || 0,
+          depreciationRate: 20,
+          lastCalculated: new Date().toISOString()
+        },
+        maintenanceRecords: [],
+        complianceStatus: 'Compliant',
+        warrantyStatus: 'Active',
+        specifications: {}
+      };
+      setAssets(prev => [...prev, newAsset]);
+    }
+    setShowAssetForm(false);
+    setEditingItem(null);
+  };
+
+  const handleSaveLicense = async (licenseData: Omit<License, 'id'>) => {
+    try {
+      const response = await apiService.createLicense(licenseData);
+      if (response.data) {
+        setLicenses(prev => [...prev, response.data]);
+      } else {
+        const newLicense: License = {
+          ...licenseData,
+          id: Date.now().toString()
+        };
+        setLicenses(prev => [...prev, newLicense]);
+      }
+    } catch (error) {
+      console.warn('Failed to create license via API, using local state');
+      const newLicense: License = {
+        ...licenseData,
+        id: Date.now().toString()
+      };
+      setLicenses(prev => [...prev, newLicense]);
+    }
+    setShowLicenseForm(false);
+    setEditingItem(null);
+  };
+
+  const handleSaveUser = async (userData: Omit<User, 'id'>) => {
+    try {
+      const response = await apiService.createUser(userData);
+      if (response.data) {
+        setUsers(prev => [...prev, response.data]);
+      } else {
+        const newUser: User = {
+          ...userData,
+          id: Date.now().toString()
+        };
+        setUsers(prev => [...prev, newUser]);
+      }
+    } catch (error) {
+      console.warn('Failed to create user via API, using local state');
+      const newUser: User = {
+        ...userData,
+        id: Date.now().toString()
+      };
+      setUsers(prev => [...prev, newUser]);
+    }
+    setShowUserForm(false);
+    setEditingItem(null);
+  };
+
+  const handleSaveAccessory = async (accessoryData: Omit<Accessory, 'id'>) => {
+    try {
+      const response = await apiService.createAccessory(accessoryData);
+      if (response.data) {
+        setAccessories(prev => [...prev, response.data]);
+      } else {
+        const newAccessory: Accessory = {
+          ...accessoryData,
+          id: Date.now().toString()
+        };
+        setAccessories(prev => [...prev, newAccessory]);
+      }
+    } catch (error) {
+      console.warn('Failed to create accessory via API, using local state');
+      const newAccessory: Accessory = {
+        ...accessoryData,
+        id: Date.now().toString()
+      };
+      setAccessories(prev => [...prev, newAccessory]);
+    }
+    setShowAccessoryForm(false);
+    setEditingItem(null);
+  };
+
+  const handleSaveConsumable = async (consumableData: Omit<Consumable, 'id'>) => {
+    try {
+      const response = await apiService.createConsumable(consumableData);
+      if (response.data) {
+        setConsumables(prev => [...prev, response.data]);
+      } else {
+        const newConsumable: Consumable = {
+          ...consumableData,
+          id: Date.now().toString()
+        };
+        setConsumables(prev => [...prev, newConsumable]);
+      }
+    } catch (error) {
+      console.warn('Failed to create consumable via API, using local state');
+      const newConsumable: Consumable = {
+        ...consumableData,
+        id: Date.now().toString()
+      };
+      setConsumables(prev => [...prev, newConsumable]);
+    }
+    setShowConsumableForm(false);
+    setEditingItem(null);
+  };
+
+  const handleSaveComponent = async (componentData: Omit<Component, 'id'>) => {
+    try {
+      const response = await apiService.createComponent(componentData);
+      if (response.data) {
+        setComponents(prev => [...prev, response.data]);
+      } else {
+        const newComponent: Component = {
+          ...componentData,
+          id: Date.now().toString()
+        };
+        setComponents(prev => [...prev, newComponent]);
+      }
+    } catch (error) {
+      console.warn('Failed to create component via API, using local state');
+      const newComponent: Component = {
+        ...componentData,
+        id: Date.now().toString()
+      };
+      setComponents(prev => [...prev, newComponent]);
+    }
+    setShowComponentForm(false);
+    setEditingItem(null);
+  };
+
+  const handleSaveKit = async (kitData: Omit<PredefinedKit, 'id'>) => {
+    try {
+      const response = await apiService.request('/kits', {
+        method: 'POST',
+        body: JSON.stringify(kitData)
+      });
+      if (response.data) {
+        setPredefinedKits(prev => [...prev, response.data]);
+      } else {
+        const newKit: PredefinedKit = {
+          ...kitData,
+          id: Date.now().toString()
+        };
+        setPredefinedKits(prev => [...prev, newKit]);
+      }
+    } catch (error) {
+      console.warn('Failed to create kit via API, using local state');
+      const newKit: PredefinedKit = {
+        ...kitData,
+        id: Date.now().toString()
+      };
+      setPredefinedKits(prev => [...prev, newKit]);
+    }
+    setShowKitForm(false);
+    setEditingItem(null);
+  };
+
+  const handleSaveRequestableItem = async (itemData: Omit<RequestableItem, 'id'>) => {
+    try {
+      const response = await apiService.request('/requestable-items', {
+        method: 'POST',
+        body: JSON.stringify(itemData)
+      });
+      if (response.data) {
+        setRequestableItems(prev => [...prev, response.data]);
+      } else {
+        const newItem: RequestableItem = {
+          ...itemData,
+          id: Date.now().toString()
+        };
+        setRequestableItems(prev => [...prev, newItem]);
+      }
+    } catch (error) {
+      console.warn('Failed to create requestable item via API, using local state');
+      const newItem: RequestableItem = {
+        ...itemData,
+        id: Date.now().toString()
+      };
+      setRequestableItems(prev => [...prev, newItem]);
+    }
+    setShowRequestableForm(false);
+    setEditingItem(null);
+  };
     if (editingItem) {
       setAssets(prev => prev.map(asset => 
         asset.id === editingItem.id ? { ...assetData, id: editingItem.id } : asset
@@ -538,6 +774,106 @@ function App() {
         <main className="flex-1 p-6 overflow-auto">
           {renderContent()}
         </main>
+        
+        {/* Asset Form */}
+        {showAssetForm && (
+          <AssetForm
+            asset={editingItem}
+            onSave={handleSaveAsset}
+            onCancel={() => {
+              setShowAssetForm(false);
+              setEditingItem(null);
+            }}
+          />
+        )}
+
+        {/* License Form */}
+        {showLicenseForm && (
+          <LicenseForm
+            license={editingItem}
+            onSave={handleSaveLicense}
+            onCancel={() => {
+              setShowLicenseForm(false);
+              setEditingItem(null);
+            }}
+          />
+        )}
+
+        {/* User Form */}
+        {showUserForm && (
+          <UserForm
+            user={editingItem}
+            onSave={handleSaveUser}
+            onCancel={() => {
+              setShowUserForm(false);
+              setEditingItem(null);
+            }}
+          />
+        )}
+
+        {/* Accessory Form */}
+        {showAccessoryForm && (
+          <AccessoryForm
+            accessory={editingItem}
+            onSave={handleSaveAccessory}
+            onCancel={() => {
+              setShowAccessoryForm(false);
+              setEditingItem(null);
+            }}
+          />
+        )}
+
+        {/* Consumable Form */}
+        {showConsumableForm && (
+          <ConsumableForm
+            consumable={editingItem}
+            onSave={handleSaveConsumable}
+            onCancel={() => {
+              setShowConsumableForm(false);
+              setEditingItem(null);
+            }}
+          />
+        )}
+
+        {/* Component Form */}
+        {showComponentForm && (
+          <ComponentForm
+            component={editingItem}
+            onSave={handleSaveComponent}
+            onCancel={() => {
+              setShowComponentForm(false);
+              setEditingItem(null);
+            }}
+          />
+        )}
+
+        {/* Predefined Kit Form */}
+        {showKitForm && (
+          <PredefinedKitForm
+            kit={editingItem}
+            onSave={handleSaveKit}
+            onCancel={() => {
+              setShowKitForm(false);
+              setEditingItem(null);
+            }}
+            availableAssets={assets}
+            availableAccessories={accessories}
+            availableLicenses={licenses}
+            availableConsumables={consumables}
+          />
+        )}
+
+        {/* Requestable Item Form */}
+        {showRequestableForm && (
+          <RequestableItemForm
+            item={editingItem}
+            onSave={handleSaveRequestableItem}
+            onCancel={() => {
+              setShowRequestableForm(false);
+              setEditingItem(null);
+            }}
+          />
+        )}
       </div>
     </div>
   );

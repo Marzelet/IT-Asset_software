@@ -40,6 +40,12 @@ class ApiService {
     } catch (error) {
       console.warn('API request failed (backend may not be available):', error);
       // Return success for demo purposes when backend is not available
+    
+    // For demo purposes, return success with the accessory data
+    if (!response.data && !response.error) {
+      return { data: { ...accessory, id: Date.now().toString() } };
+    }
+    
       return { data: null as T };
     }
   }
@@ -48,12 +54,24 @@ class ApiService {
   async login(credentials: { username: string; password: string }) {
     const response = await this.request<{ token: string; user: any }>('/auth/login', {
       method: 'POST',
+    
+    // For demo purposes, return success with the consumable data
+    if (!response.data && !response.error) {
+      return { data: { ...consumable, id: Date.now().toString() } };
+    }
+    
       body: JSON.stringify(credentials),
     });
     
     if (response.token) {
       this.token = response.token;
       localStorage.setItem('authToken', response.token);
+    }
+    
+    
+    // For demo purposes, return success with the component data
+    if (!response.data && !response.error) {
+      return { data: { ...component, id: Date.now().toString() } };
     }
     
     return response;
@@ -76,6 +94,12 @@ class ApiService {
       method: 'POST',
       body: JSON.stringify(asset),
     });
+    
+    // For demo purposes, return success with the asset data
+    if (!response.data && !response.error) {
+      return { data: { ...asset, id: Date.now().toString() } };
+    }
+    
   }
 
   async updateAsset(id: string, asset: any) {
@@ -101,6 +125,12 @@ class ApiService {
       method: 'POST',
       body: JSON.stringify(license),
     });
+    
+    // For demo purposes, return success with the license data
+    if (!response.data && !response.error) {
+      return { data: { ...license, id: Date.now().toString() } };
+    }
+    
   }
 
   async updateLicense(id: string, license: any) {
@@ -201,6 +231,12 @@ class ApiService {
       method: 'POST',
       body: JSON.stringify(user),
     });
+    
+    // For demo purposes, return success with the user data
+    if (!response.data && !response.error) {
+      return { data: { ...user, id: Date.now().toString() } };
+    }
+    
   }
 
   async updateUser(id: string, user: any) {

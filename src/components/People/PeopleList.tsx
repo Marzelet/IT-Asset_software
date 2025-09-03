@@ -30,7 +30,7 @@ export default function PeopleList({ users, onCreateNew, onEdit, onDelete, onVie
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">People</h1>
         <button
-          onClick={onCreateNew}
+          onClick={() => onCreateNew('user')}
           className="bg-blue-600 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-blue-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
@@ -81,7 +81,7 @@ export default function PeopleList({ users, onCreateNew, onEdit, onDelete, onVie
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
                     <Users className="w-12 h-12 mx-auto text-gray-300 mb-4" />
-                    <p>No users found. <button onClick={onCreateNew} className="text-blue-600 hover:text-blue-500">Create your first user</button></p>
+                    <p>No users found. <button onClick={() => onCreateNew('user')} className="text-blue-600 hover:text-blue-500">Create your first user</button></p>
                   </td>
                 </tr>
               ) : (

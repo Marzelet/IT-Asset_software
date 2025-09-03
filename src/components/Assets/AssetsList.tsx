@@ -37,7 +37,7 @@ export default function AssetsList({ assets, onCreateNew, onEdit, onDelete, onVi
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Assets</h1>
         <button
-          onClick={onCreateNew}
+          onClick={() => onCreateNew('asset')}
           className="bg-blue-600 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-blue-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
@@ -89,7 +89,7 @@ export default function AssetsList({ assets, onCreateNew, onEdit, onDelete, onVi
               {filteredAssets.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
-                    No assets found. <button onClick={onCreateNew} className="text-blue-600 hover:text-blue-500">Create your first asset</button>
+                    No assets found. <button onClick={() => onCreateNew('asset')} className="text-blue-600 hover:text-blue-500">Create your first asset</button>
                   </td>
                 </tr>
               ) : (

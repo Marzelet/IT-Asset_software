@@ -11,7 +11,7 @@ export interface Asset {
   assignedTo?: string;
   assignedDepartment?: string;
   custodianHistory: CustodianRecord[];
-  location: AssetLocation;
+  location: AssetLocation | string;
   purchaseDate: string;
   purchaseCost: number;
   warrantyExpiry?: string;

@@ -34,7 +34,7 @@ export default function ConsumablesList({ consumables, onCreateNew, onEdit, onDe
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Consumables</h1>
         <button
-          onClick={onCreateNew}
+          onClick={() => onCreateNew('consumable')}
           className="bg-purple-600 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-purple-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
@@ -74,7 +74,7 @@ export default function ConsumablesList({ consumables, onCreateNew, onEdit, onDe
                 <tr>
                   <td colSpan={7} className="px-6 py-12 text-center text-gray-500">
                     <Beaker className="w-12 h-12 mx-auto text-gray-300 mb-4" />
-                    <p>No consumables found. <button onClick={onCreateNew} className="text-purple-600 hover:text-purple-500">Create your first consumable</button></p>
+                    <p>No consumables found. <button onClick={() => onCreateNew('consumable')} className="text-purple-600 hover:text-purple-500">Create your first consumable</button></p>
                   </td>
                 </tr>
               ) : (

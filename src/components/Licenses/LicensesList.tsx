@@ -31,7 +31,7 @@ export default function LicensesList({ licenses, onCreateNew, onEdit, onDelete, 
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Software Licenses</h1>
         <button
-          onClick={onCreateNew}
+          onClick={() => onCreateNew('license')}
           className="bg-pink-600 text-white px-4 py-2 rounded-md flex items-center space-x-2 hover:bg-pink-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
@@ -70,7 +70,7 @@ export default function LicensesList({ licenses, onCreateNew, onEdit, onDelete, 
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
                     <Key className="w-12 h-12 mx-auto text-gray-300 mb-4" />
-                    <p>No licenses found. <button onClick={onCreateNew} className="text-pink-600 hover:text-pink-500">Create your first license</button></p>
+                    <p>No licenses found. <button onClick={() => onCreateNew('license')} className="text-pink-600 hover:text-pink-500">Create your first license</button></p>
                   </td>
                 </tr>
               ) : (
