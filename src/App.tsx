@@ -23,7 +23,7 @@ import { ProfileModal } from './components/Profile/ProfileModal';
 import { AssetForm } from './components/Assets/AssetForm';
 import { LicenseForm } from './components/Licenses/LicenseForm';
 import { UserForm } from './components/People/UserForm';
-import { AccessoryForm } from './components/Accessories/AccessoryForm';
+import AccessoryForm from './components/Accessories/AccessoryForm';
 import { ConsumableForm } from './components/Consumables/ConsumableForm';
 import { ComponentForm } from './components/Components/ComponentForm';
 import { PredefinedKitForm } from './components/PredefinedKits/PredefinedKitForm';
