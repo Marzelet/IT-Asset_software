@@ -5,7 +5,7 @@ import { EnhancedDashboard } from './components/Dashboard/EnhancedDashboard';
 import { AssetsList } from './components/Assets/AssetsList';
 import { LicensesList } from './components/Licenses/LicensesList';
 import { PeopleList } from './components/People/PeopleList';
-import { AccessoriesList } from './components/Accessories/AccessoriesList';
+import AccessoriesList from './components/Accessories/AccessoriesList';
 import { ConsumablesList } from './components/Consumables/ConsumablesList';
 import { ComponentsList } from './components/Components/ComponentsList';
 import { PredefinedKitsList } from './components/PredefinedKits/PredefinedKitsList';
