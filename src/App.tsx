@@ -10,7 +10,7 @@ import { ConsumablesList } from './components/Consumables/ConsumablesList';
 import { ComponentsList } from './components/Components/ComponentsList';
 import { PredefinedKitsList } from './components/PredefinedKits/PredefinedKitsList';
 import { RequestableItemsList } from './components/RequestableItems/RequestableItemsList';
-import { AlertsManager } from './components/Alerts/AlertsManager';
+import AlertsManager from './components/Alerts/AlertsManager';
 import { ReportsManager } from './components/Reports/ReportsManager';
 import { SettingsManager } from './components/Settings/SettingsManager';
 import { AnalyticsManager } from './components/Analytics/AnalyticsManager';
