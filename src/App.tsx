@@ -20,7 +20,7 @@ import { FinancialManager } from './components/Financial/FinancialManager';
 import { IntegrationsManager } from './components/Integrations/IntegrationsManager';
 import { ImportManager } from './components/Import/ImportManager';
 import { ProfileModal } from './components/Profile/ProfileModal';
-import { AssetForm } from './components/Assets/AssetForm';
+import AssetForm from './components/Assets/AssetForm';
 import { LicenseForm } from './components/Licenses/LicenseForm';
 import { UserForm } from './components/People/UserForm';
 import AccessoryForm from './components/Accessories/AccessoryForm';
