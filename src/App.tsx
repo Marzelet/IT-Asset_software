@@ -13,7 +13,7 @@ import { RequestableItemsList } from './components/RequestableItems/RequestableI
 import AlertsManager from './components/Alerts/AlertsManager';
 import { ReportsManager } from './components/Reports/ReportsManager';
 import { SettingsManager } from './components/Settings/SettingsManager';
-import { AnalyticsManager } from './components/Analytics/AnalyticsManager';
+import AnalyticsManager from './components/Analytics/AnalyticsManager';
 import { ComplianceManager } from './components/Compliance/ComplianceManager';
 import { MaintenanceManager } from './components/Maintenance/MaintenanceManager';
 import { FinancialManager } from './components/Financial/FinancialManager';
