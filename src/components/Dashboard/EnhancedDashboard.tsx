@@ -16,6 +16,7 @@ import {
 import MetricCard from './MetricCard';
 import QuickActions from './QuickActions';
 import { DashboardMetrics } from '../../types';
+import DatabaseStatus from '../Common/DatabaseStatus';
 
 interface EnhancedDashboardProps {
   metrics: DashboardMetrics;
@@ -137,7 +138,7 @@ export default function EnhancedDashboard({ metrics, onSectionChange, onCreateNe
     <div className="p-6">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">IT Asset Management Dashboard</h1>
-        
+        <DatabaseStatus />
       </div>
 
       {/* Primary Metrics */}

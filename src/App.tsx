@@ -181,7 +181,6 @@ function App() {
     lastName: 'User',
     email: 'admin@company.com',
     username: 'admin',
-    avatar: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150',
     department: 'IT',
     jobTitle: 'System Administrator',
     location: 'Main Office',
@@ -196,15 +195,24 @@ function App() {
     }
   });
 
-  const [dashboardMetrics] = useState<DashboardMetrics>({
-    totalAssets: 1,
-    totalUsers: 1,
-    totalLicenses: 1,
-    pendingRequests: 0,
-    assetsNeedingMaintenance: 0,
-    expiringLicenses: 0,
-    lowStockItems: 1,
-    complianceIssues: 0
+  const dashboardMetrics: DashboardMetrics = {
+    assets: assets.length,
+    licenses: licenses.length,
+    accessories: accessories.length,
+    consumables: consumables.length,
+    components: components.length,
+    people: users.length,
+    predefinedKits: kits.length,
+    requestableItems: requestableItems.length,
+    alerts: 3,
+    expiringWarranties: 2,
+    expiringLicenses: 1,
+    maintenanceDue: 1,
+    complianceIssues: 0,
+    totalValue: assets.reduce((sum, asset) => sum + (asset.purchaseCost || 0), 0) +
+                licenses.reduce((sum, license) => sum + (license.cost || 0), 0) +
+                accessories.reduce((sum, acc) => sum + (acc.purchaseCost || 0), 0) +
+                components.reduce((sum, comp) => sum + (comp.purchaseCost || 0), 0)
   });
 
   // Create handlers
@@ -600,12 +608,12 @@ function App() {
       <div className="lg:ml-64">
         <Header 
           userProfile={userProfile}
-          onCreateNew={handleCreateNew}
-          onProfileUpdate={() => setShowProfileModal(true)}
+          onProfileUpdate={handleProfileUpdate}
           onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
+          sidebarOpen={sidebarOpen}
         />
         
-        <main className="p-6">
+        <main className="min-h-screen bg-gray-50">
           {renderContent()}
         </main>
       </div>

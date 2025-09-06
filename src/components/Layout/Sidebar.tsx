@@ -52,7 +52,7 @@ const menuItems = [
 
 export default function Sidebar({ activeSection, onSectionChange, isOpen, onToggle }: SidebarProps) {
   return (
-    <div className={`bg-slate-800 text-white transition-all duration-300 ${isOpen ? 'w-64' : 'w-16'} min-h-screen flex flex-col fixed left-0 top-0 z-40`}>
+    <div className={`bg-slate-800 text-white transition-all duration-300 ${isOpen ? 'w-64' : 'w-16'} h-screen flex flex-col fixed left-0 top-0 z-40 overflow-hidden`}>
       <div className="p-4 border-b border-slate-700 flex items-center justify-between">
         {isOpen && <h1 className="text-xl font-bold">AssetFlow</h1>}
         <button
@@ -63,7 +63,7 @@ export default function Sidebar({ activeSection, onSectionChange, isOpen, onTogg
         </button>
       </div>
       
-      <nav className="flex-1 py-4">
+      <nav className="flex-1 py-4 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeSection === item.id;
