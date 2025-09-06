@@ -176,10 +176,24 @@ function App() {
   ]);
 
   const [userProfile] = useState({
-    name: 'Admin User',
+    id: '1',
+    firstName: 'Admin',
+    lastName: 'User',
     email: 'admin@company.com',
+    username: 'admin',
     avatar: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150',
-    role: 'System Administrator'
+    department: 'IT',
+    jobTitle: 'System Administrator',
+    location: 'Main Office',
+    lastLogin: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+    permissions: ['admin'],
+    preferences: {
+      theme: 'light',
+      language: 'en',
+      timezone: 'UTC',
+      notifications: true
+    }
   });
 
   const [dashboardMetrics] = useState<DashboardMetrics>({
@@ -599,9 +613,11 @@ function App() {
       {/* Profile Modal */}
       {showProfileModal && (
         <ProfileModal
-          user={userProfile}
+          isOpen={showProfileModal}
+          profile={userProfile}
           onSave={handleProfileUpdate}
           onClose={() => setShowProfileModal(false)}
+          onUpdate={handleProfileUpdate}
         />
       )}
 
