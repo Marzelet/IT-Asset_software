@@ -64,16 +64,26 @@ function App() {
   const renderContent = () => {
     switch (currentView) {
       case 'dashboard':
+        const dashboardMetrics = {
+          totalAssets: assets.length,
+          totalUsers: users.length,
+          totalLicenses: licenses.length,
+          totalComponents: components.length,
+          totalAccessories: accessories.length,
+          totalConsumables: consumables.length,
+          totalKits: predefinedKits.length,
+          totalRequestableItems: requestableItems.length,
+          alerts: 0,
+          totalValue: 0,
+          maintenanceDue: 0,
+          lowStock: 0
+        };
+        
         return (
           <EnhancedDashboard
-            assets={assets}
-            users={users}
-            licenses={licenses}
-            components={components}
-            accessories={accessories}
-            consumables={consumables}
-            predefinedKits={predefinedKits}
-            requestableItems={requestableItems}
+            metrics={dashboardMetrics}
+            onSectionChange={setCurrentView}
+            onCreateNew={(section) => setCurrentView(`add-${section}`)}
           />
         );
       case 'assets':
