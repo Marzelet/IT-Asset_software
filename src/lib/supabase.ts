@@ -14,13 +14,23 @@ export const supabase = createClient(
 
 // Database connection status
 export const checkDatabaseConnection = async () => {
+  // Check if environment variables are properly configured
+  if (!supabaseUrl || !supabaseAnonKey || 
+      supabaseUrl === 'https://placeholder.supabase.co' || 
+      supabaseAnonKey === 'placeholder-key') {
+    return { 
+      connected: false, 
+      error: 'Database connection not configured. Please connect to Supabase using the "Connect to Supabase" button.' 
+    };
+  }
+
   try {
     const { data, error } = await supabase.from('_health_check').select('*').limit(1);
     return { connected: !error, error: error?.message };
   } catch (error) {
     return { 
       connected: false, 
-      error: 'Database connection not configured. Please connect to Supabase.' 
+      error: 'Failed to connect to database. Please check your Supabase configuration.' 
     };
   }
 };
